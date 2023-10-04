@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.microusuarios.dto.RoleDTO;
 import com.example.microusuarios.dto.UsuarioDTO;
 import com.example.microusuarios.services.UsuarioService;
 
@@ -38,9 +39,23 @@ public class UsuarioController {
             return null;
         }
     }
+
+    @GetMapping("/roles/{id}")
+    public ResponseEntity<List<RoleDTO>> getRolesByUser(@PathVariable("id")String id){
+        List<RoleDTO> roleDTOs = usuarioService.getRolesByUser(id);
+        return ResponseEntity.ok(roleDTOs);
+    }
     
     @PostMapping("/{id}")
-    public void addUpdateUsuario(@PathVariable("id") String id, @RequestBody UsuarioDTO usuario){
+    public ResponseEntity<UsuarioDTO> addUpdateUsuario(@PathVariable("id") String id, @RequestBody UsuarioDTO usuario){
         usuarioService.addUsuario(id, usuario);
+
+        UsuarioDTO u = usuarioService.getUsuarioById(id);
+
+        if(u != null){
+            return null;
+        }else{
+            return ResponseEntity.ok(u);
+        }
     }
 }

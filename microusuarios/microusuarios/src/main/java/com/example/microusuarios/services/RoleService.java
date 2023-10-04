@@ -3,7 +3,6 @@ package com.example.microusuarios.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,7 @@ public class RoleService implements IRoleService{
         List<RoleDTO> roleDTOs = new ArrayList<>();
 
         for (Role role : roles) {
-            RoleDTO roleDTO = new RoleDTO();
-            BeanUtils.copyProperties(role, roleDTOs, "usuarios");
+            RoleDTO roleDTO = new RoleDTO(role.getRole(), role.getFuncion());
             roleDTOs.add(roleDTO);
         }
 
@@ -35,10 +33,12 @@ public class RoleService implements IRoleService{
     @Override
     public RoleDTO getRoleById(String role) {
         Role role2 = roleRespository.findById(role).orElse(null);
-        RoleDTO roleDTO = new RoleDTO();
 
-        BeanUtils.copyProperties(role2, roleDTO, "usuarios");
-
-        return roleDTO;
+        if(role2 == null){
+            return null;
+        }else{
+            RoleDTO roleDTO = new RoleDTO(role2.getRole(), role2.getFuncion());
+            return roleDTO;
+        }
     }
 }
