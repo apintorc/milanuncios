@@ -115,4 +115,26 @@ public class AnuncioService implements IAnuncioService {
 
         anuncioRepository.save(anuncio);
     }
+
+    @Override
+    public AnuncioDto getAnuncioUser(String user) {
+        Anuncio anuncio = anuncioRepository.findAnuncioByUser(user);
+        if (anuncio != null) {
+            AnuncioDto anunciodto = new AnuncioDto();
+            Categoria categoria = anuncio.getCategoria();
+            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(),
+                    categoria.getDescripcion());
+            anunciodto.setId_anuncio(anuncio.getId_anuncio());
+            anunciodto.setId_categoria(categoriadtoCategoriaDto);
+            anunciodto.setUser(anuncio.getUser());
+            anunciodto.setTitulo(anuncio.getTitulo());
+            anunciodto.setDescripcion(anuncio.getDescripcion());
+            anunciodto.setPrecio(anuncio.getPrecio());
+            anunciodto.setFecha_publicacion(anuncio.getFecha_publicacion());
+            return anunciodto;
+
+        } else {
+            return null;
+        }
+    }
 }

@@ -10,4 +10,5 @@ public interface IAnuncioService {
     public List<AnuncioDto> getAnunciosByCategoria(int id_categoria);
     public void deleteUsuario(int id_anuncio);
     public void updateAnuncioById(AnuncioDto anunciodto);
+    public AnuncioDto getAnuncioUser(String user);
 }
