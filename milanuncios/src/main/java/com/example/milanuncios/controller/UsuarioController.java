@@ -49,7 +49,7 @@ public class UsuarioController {
 			if(rolesDTO.contains(new Role("Admin","Administración del zoo"))){
 				return "admin";
 			}else {
-				return "index_user";
+				return getCategorias(model);
 			}
 			
 		}if(usuario == null) {
@@ -68,16 +68,10 @@ public class UsuarioController {
 	
 	@GetMapping("welcome_user")
 	public String getCategorias(Model model) {
-		//List<Equipo>equipos = equipoService.getEquipos();
 		List<Anuncio>anuncios = anuncioService.getAnuncios();
-		
 		model.addAttribute("anuncios",anuncios);
-		/**List<Categoria>categorias = ;
-		Categoria categoria1 = new Categoria(1,"Coches");
-		Categoria categoria2 = new Categoria(2,"Bicicletas");
-		categorias.add(categoria1);
-		categorias.add(categoria2);
-		model.addAttribute("categorias",categorias);*/
+		List<Categoria>categorias = anuncioService.get_categorias();
+		model.addAttribute("categorias",categorias);
 		return "index_user";
 	}
 	
@@ -94,34 +88,19 @@ public class UsuarioController {
 		return "alta_anuncio";
 	}
 	
-	@GetMapping("list_anuncios_user")
-	public String getAnunciosByCategoriaUser(Model model) {
-		//List<Jugador>jugadores = equipoService.getJugadoresByEquipo(id_equipo);
-		List<Anuncio>anuncios = new ArrayList<Anuncio>();
-		Anuncio anuncio = new Anuncio(1, "alex", "Vendo bicicleta", "Se vende bicicleta Scott Scale con 2 años de uso, incluye garantía y componentes adicionales", 348,new Categoria(2,"Bicicletas"));
-		Anuncio anuncio2 = new Anuncio(2, "pedro", "Vendo coche", "Se vende coche Renault Clio con 6 años de uso y tiene 10000kilometros", 5478,new Categoria(2,"Coches"));
-		anuncios.add(anuncio);
-		anuncios.add(anuncio2);
-		model.addAttribute("anuncios",anuncios);
-		return "list_anuncios";
-	}
-	
 	@GetMapping("list_anuncios_user/{id_categoria}/{descripcion}")
 	public String getAnunciosByCategoriaUser(Model model,@PathVariable("id_categoria") int id_categoria,@PathVariable("descripcion") String descripcion ) {
-		//List<Jugador>jugadores = equipoService.getJugadoresByEquipo(id_equipo);
-		List<Anuncio>anuncios = new ArrayList<Anuncio>();
-		Anuncio anuncio = new Anuncio(1, "alex", "Vendo bicicleta", "Se vende bicicleta con 2 años de uso, incluye garantía y componentes adicionales", 348,new Categoria(2,"Bicicletas"));
-		Anuncio anuncio2 = new Anuncio(2, "pedro", "Vendo coche", "Se vende coche Renault Clio con 6 años de uso y tiene 10000kilometros", 5478,new Categoria(2,"Coches"));
-		anuncios.add(anuncio);
-		anuncios.add(anuncio2);
+		List<Anuncio>anuncios = anuncioService.getAnunciosByCategoria(id_categoria);
+		List<Categoria>categorias = anuncioService.get_categorias();
+		model.addAttribute("categorias",categorias);
 		model.addAttribute("anuncios",anuncios);
-		return "list_anuncios";
+		return "list_anuncios_user";
 	}
 	
-	@GetMapping("ver_anuncio")
-	public String verAnuncio(Model model) {
+	@GetMapping("/ver_anuncio/{id_anuncio}")
+	public String verAnuncio(Model model,@PathVariable("id_anuncio") int id_anuncio) {
 		//List<Jugador>jugadores = equipoService.getJugadoresByEquipo(id_equipo);
-		Anuncio anuncio = new Anuncio(1, "alex", "Vendo bicicleta", "Se vende bicicleta con 2 años de uso, incluye garantía y componentes adicionales", 348,new Categoria(2,"Bicicletas"));
+		Anuncio anuncio = anuncioService.getAnuncioById(id_anuncio);
 		model.addAttribute("anuncio",anuncio);
 		return "ver_anuncio";
 	}

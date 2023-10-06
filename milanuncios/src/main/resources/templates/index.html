@@ -40,9 +40,11 @@
               </div>
 
               <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
-			</form>
+              
+			</form><br/>
+			<div> ¿No tienes cuenta aún? <a th:href="@{/registrar}"> Regístrate!</a></li></div>
             </div>
-
+			
 <p th:if="${mensaje != null}" th:text="${mensaje}"></p>
           </div>
         </div>
