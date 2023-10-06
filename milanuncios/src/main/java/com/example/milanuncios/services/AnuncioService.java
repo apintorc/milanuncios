@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import com.example.milanuncios.util.Anuncio;
 import com.example.milanuncios.util.Categoria;
 
@@ -24,8 +27,8 @@ public interface AnuncioService {
 	public List<Anuncio> getAnunciosByCategoria(@PathVariable("id_categoria") int id_categoria);
 	@DeleteMapping("/{id_anuncio}")
 	public void deleteAnuncio(int id_anuncio);
-	@PutMapping
-	public void updateAnuncioById(Anuncio anunciodto);
+	@PostMapping
+	public void updateAnuncioById(@RequestBody Anuncio anunciodto);
 	@GetMapping("/categoria")
 	public List<Categoria> get_categorias();
 	

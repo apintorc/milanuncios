@@ -38,18 +38,7 @@ public class AdminController {
 		return "list_categorias";
 	}
 	
-	@GetMapping("/alta_anuncio")
-	public String altaAnuncio(Model model) {
-		model.addAttribute("anuncio", new Anuncio());
-		List<Categoria>categorias = new ArrayList<Categoria>();
-		Categoria categoria1 = new Categoria(1,"Coches");
-		Categoria categoria2 = new Categoria(2,"Bicicletas");
-		categorias.add(categoria1);
-		categorias.add(categoria2);
-		model.addAttribute("categorias",categorias);
-		
-		return "alta_anuncio";
-	}
+
 	
 	@GetMapping("list_anuncios")
 	public String getAnunciosByCategoria(Model model) {

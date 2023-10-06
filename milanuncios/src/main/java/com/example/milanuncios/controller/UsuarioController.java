@@ -3,7 +3,6 @@ package com.example.milanuncios.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import com.example.milanuncios.services.AnuncioService;
 import com.example.milanuncios.services.UsuarioService;
 import com.example.milanuncios.util.Anuncio;
@@ -15,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,7 +46,7 @@ public class UsuarioController {
 			//HttpSession session = request.getSession(true);
 			//session.setAttribute("user", session);
 			List<Role>rolesDTO = usuarioService.getRolesByUser(usuario.getUser());
-			if(rolesDTO.contains(new Role("Admin","Administración del zoo"))){
+			if(rolesDTO.contains(new Role("Admin"))){
 				return "admin";
 			}else {
 				return getCategorias(model);
@@ -75,18 +75,24 @@ public class UsuarioController {
 		return "index_user";
 	}
 	
-	@GetMapping("/alta_anuncio_user")
+	@GetMapping("/alta_anuncio")
 	public String altaAnuncioUser(Model model) {
 		model.addAttribute("anuncio", new Anuncio());
-		List<Categoria>categorias = new ArrayList<Categoria>();
-		Categoria categoria1 = new Categoria(1,"Coches");
-		Categoria categoria2 = new Categoria(2,"Bicicletas");
-		categorias.add(categoria1);
-		categorias.add(categoria2);
+		List<Categoria>categorias = anuncioService.get_categorias();
 		model.addAttribute("categorias",categorias);
 		
 		return "alta_anuncio";
 	}
+	
+	@PostMapping("/grabar_anuncio")
+	public String grabar_anuncio(@ModelAttribute("anuncio") Anuncio anuncio, Model model) {
+		
+		anuncioService.updateAnuncioById(anuncio);
+		return getCategorias(model);
+	}
+	
+
+
 	
 	@GetMapping("list_anuncios_user/{id_categoria}/{descripcion}")
 	public String getAnunciosByCategoriaUser(Model model,@PathVariable("id_categoria") int id_categoria,@PathVariable("descripcion") String descripcion ) {

@@ -12,8 +12,27 @@
     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="#">Mi Anuncios</a>
-            <!-- Agregar botón de retroceso o enlace a la lista de anuncios aquí -->
+            <a class="navbar-brand" href="/welcome_user">Mil Anuncios</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/welcome_user">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alta_anuncio">Crear Anuncio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/misanuncios">Mis Anuncios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -27,6 +46,7 @@
                         <p class="card-text" th:text="${anuncio.descripcion}"></p>
                         <p class="card-text"><strong>Precio:</strong> <span th:text="${anuncio.precio}"></span></p>
                         <p class="card-text"><strong>Usuario anunciante:</strong> <span th:text="${anuncio.user}"></span></p>
+                        <p class="card-text"><strong>Fecha de la publicación:</strong> <span th:text="${anuncio.fecha_publicacion}"></span></p>
                         <p class="card-text"><strong>Categoría:</strong> <span th:text="${anuncio.categoria.descripcion}"></span></p>
                         <!--<p class="card-text"><strong>Fecha de Publicación:</strong> <span th:text="${anuncio.fecha}"></span></p>-->
                         <!-- Agregar botones para contactar, compartir o cualquier otra acción necesaria -->
