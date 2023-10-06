@@ -46,9 +46,6 @@ public class AnuncioController {
 
     @GetMapping("/categoria/{id_categoria}")
     public ResponseEntity<List<AnuncioDto>> get_anuncios_by_categoria(@PathVariable("id_categoria") int id_categoria){
-		if(anuncioService.getAnuncioById(id_categoria)==null) {
-			return ResponseEntity.noContent().build();
-		}
 		return ResponseEntity.ok(anuncioService.getAnunciosByCategoria(id_categoria));
 	}
 

@@ -14,18 +14,19 @@ import com.example.microAnuncios.model.Categoria;
 import com.example.microAnuncios.repository.AnuncioRepository;
 
 @Service
-public class AnuncioService implements IAnuncioService{
-   
-    @Autowired 
+public class AnuncioService implements IAnuncioService {
+
+    @Autowired
     AnuncioRepository anuncioRepository;
 
     @Override
     public AnuncioDto getAnuncioById(int id_anuncio) {
         Anuncio anuncio = anuncioRepository.findById(id_anuncio).orElse(null);
-        if(anuncio != null){
+        if (anuncio != null) {
             AnuncioDto anunciodto = new AnuncioDto();
             Categoria categoria = anuncio.getCategoria();
-            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(), categoria.getDescripcion());
+            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(),
+                    categoria.getDescripcion());
             System.out.println(categoriadtoCategoriaDto);
             anunciodto.setId_anuncio(id_anuncio);
             anunciodto.setId_categoria(categoriadtoCategoriaDto);
@@ -49,7 +50,8 @@ public class AnuncioService implements IAnuncioService{
         for (Anuncio anuncio : anuncios) {
             AnuncioDto anunciodto = new AnuncioDto();
             Categoria categoria = anuncio.getCategoria();
-            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(), categoria.getDescripcion());
+            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(),
+                    categoria.getDescripcion());
             System.out.println(categoriadtoCategoriaDto);
             anunciodto.setId_anuncio(anuncio.getId_anuncio());
             anunciodto.setId_categoria(categoriadtoCategoriaDto);
@@ -70,24 +72,24 @@ public class AnuncioService implements IAnuncioService{
         List<Anuncio> anuncios = anuncioRepository.findAnunciosByCategoria(id_categoria);
         List<AnuncioDto> anunciosdto = new ArrayList<>();
 
-        if(anuncios != null){
+        if (anuncios.size() != 0) {
             for (Anuncio anuncio : anuncios) {
-            AnuncioDto anunciodto = new AnuncioDto();
-            Categoria categoria = anuncio.getCategoria();
-            CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(), categoria.getDescripcion());
-            System.out.println(categoriadtoCategoriaDto);
-            anunciodto.setId_anuncio(anuncio.getId_anuncio());
-            anunciodto.setId_categoria(categoriadtoCategoriaDto);
-            anunciodto.setUser(anuncio.getUser());
-            anunciodto.setTitulo(anuncio.getTitulo());
-            anunciodto.setDescripcion(anuncio.getDescripcion());
-            anunciodto.setPrecio(anuncio.getPrecio());
-            anunciodto.setFecha_publicacion(anuncio.getFecha_publicacion());
+                AnuncioDto anunciodto = new AnuncioDto();
+                Categoria categoria = anuncio.getCategoria();
+                CategoriaDto categoriadtoCategoriaDto = new CategoriaDto(categoria.getId_categoria(),
+                        categoria.getDescripcion());
 
-            anunciosdto.add(anunciodto);
-        }
-        }
+                anunciodto.setId_anuncio(anuncio.getId_anuncio());
+                anunciodto.setId_categoria(categoriadtoCategoriaDto);
+                anunciodto.setUser(anuncio.getUser());
+                anunciodto.setTitulo(anuncio.getTitulo());
+                anunciodto.setDescripcion(anuncio.getDescripcion());
+                anunciodto.setPrecio(anuncio.getPrecio());
+                anunciodto.setFecha_publicacion(anuncio.getFecha_publicacion());
 
+                anunciosdto.add(anunciodto);
+            }
+        }
         return anunciosdto;
     }
 
@@ -97,10 +99,11 @@ public class AnuncioService implements IAnuncioService{
     }
 
     @Override
-    public void updateAnuncioById(AnuncioDto anunciodto){
+    public void updateAnuncioById(AnuncioDto anunciodto) {
         Anuncio anuncio = new Anuncio();
         CategoriaDto categoriadtoCategoriaDto = anunciodto.getId_categoria();
-        Categoria categoria = new Categoria(categoriadtoCategoriaDto.getId_categoria(), categoriadtoCategoriaDto.getDescripcion());
+        Categoria categoria = new Categoria(categoriadtoCategoriaDto.getId_categoria(),
+                categoriadtoCategoriaDto.getDescripcion());
 
         anuncio.setId_anuncio(anunciodto.getId_anuncio());
         anuncio.setCategoria(categoria);
@@ -109,7 +112,7 @@ public class AnuncioService implements IAnuncioService{
         anuncio.setDescripcion(anunciodto.getDescripcion());
         anuncio.setFecha_publicacion(anunciodto.getFecha_publicacion());
         anuncio.setPrecio(anunciodto.getPrecio());
-        
+
         anuncioRepository.save(anuncio);
     }
 }
