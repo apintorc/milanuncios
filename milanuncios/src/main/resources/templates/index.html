@@ -28,14 +28,14 @@
 
               <h2 class="fw-bold mb-2 text-uppercase">MILANUNCIOS</h2>
               <p class="text-white-50 mb-5">Iniciar sesión</p>
-			<form action="#"  method="GET" th:action="@{/list_categorias}" class="form-horizontal">
+			<form action="#"  th:object="${usuario}" method="POST" th:action="@{/login}" class="form-horizontal">
               <div class="form-outline form-white mb-4">
-                <input type="email" id="user"   class="form-control form-control-lg" />
-                <label class="form-label" for="typeEmailX">Email</label>
+                <input type="text" id="user" th:field="*{user}"  class="form-control form-control-lg" />
+                <label class="form-label" for="typeEmailX">User</label>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="password"  class="form-control form-control-lg" />
+                <input type="password" id="password" th:field="*{password}" class="form-control form-control-lg" />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 

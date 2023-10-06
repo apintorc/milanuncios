@@ -4,43 +4,80 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.example.milanuncios.services.AnuncioService;
+import com.example.milanuncios.services.UsuarioService;
 import com.example.milanuncios.util.Anuncio;
 import com.example.milanuncios.util.Categoria;
 import com.example.milanuncios.util.Role;
 import com.example.milanuncios.util.Usuario;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping
 public class UsuarioController {
-	
+	@Autowired
+	UsuarioService usuarioService;
+	@Autowired
+	AnuncioService anuncioService;
 	@GetMapping("registrar")
 	public String registrar(Model model) {
-		//List<Equipo>equipos = equipoService.getEquipos();
+		model.addAttribute("usuario", new Usuario());
 		return "registrar";
 	}
+	
+	@GetMapping()
+	public String displayLogin(Model model) {
+		model.addAttribute("usuario", new Usuario());
+		return "index";
+	}
+	
+	@PostMapping("/login")
+	public String iniciarSesion(Usuario usuario_v, Model model) {
+		
+		Usuario usuario = usuarioService.getUsuarioById(usuario_v.getUser());
+		if(usuario != null && usuario.getPassword().equals(usuario_v.getPassword())) {
+			//HttpSession session = request.getSession(true);
+			//session.setAttribute("user", session);
+			List<Role>rolesDTO = usuarioService.getRolesByUser(usuario.getUser());
+			if(rolesDTO.contains(new Role("Admin","Administración del zoo"))){
+				return "admin";
+			}else {
+				return "index_user";
+			}
+			
+		}if(usuario == null) {
+			model.addAttribute("mensaje", "Los datos introducidos no son correctos");
+		}
+		
+		return "index";
+	}
+	
+	@PostMapping("/grabar_usuario")
+	public String update_cliente(Usuario usuario, Model model) {
+		usuarioService.addUpdateUsuario(usuario);
+		return "index";
+	}
+
 	
 	@GetMapping("welcome_user")
 	public String getCategorias(Model model) {
 		//List<Equipo>equipos = equipoService.getEquipos();
-		List<Anuncio>anuncios = new ArrayList<Anuncio>();
-		Anuncio anuncio = new Anuncio(1, "alex", "Vendo bicicleta", "Se vende bicicleta Scott Scale con 2 años de uso, incluye garantía y componentes adicionales", 348,new Categoria(2,"Bicicletas"));
-		Anuncio anuncio2 = new Anuncio(2, "pedro", "Vendo coche", "Se vende coche Renault Clio con 6 años de uso y tiene 10000kilometros", 5478,new Categoria(2,"Coches"));
-		anuncios.add(anuncio);
-		anuncios.add(anuncio2);
+		List<Anuncio>anuncios = anuncioService.getAnuncios();
+		
 		model.addAttribute("anuncios",anuncios);
-		List<Categoria>categorias = new ArrayList<Categoria>();
+		/**List<Categoria>categorias = ;
 		Categoria categoria1 = new Categoria(1,"Coches");
 		Categoria categoria2 = new Categoria(2,"Bicicletas");
 		categorias.add(categoria1);
 		categorias.add(categoria2);
-		model.addAttribute("categorias",categorias);
+		model.addAttribute("categorias",categorias);*/
 		return "index_user";
 	}
 	
