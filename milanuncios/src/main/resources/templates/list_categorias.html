@@ -15,11 +15,9 @@
                 <hr>
                 <ul class="list-group">
                     <li class="list-group-item"><a th:href="@{/list_anuncios}">Listado de Anuncios</a></li>
-                    <li class="list-group-item"><a th:href="@{/alta_anuncio}">Alta de Anuncio</a></li>
                     <li class="list-group-item"><a th:href="@{/list_categorias}">Listado de Categorías</a></li>
                     <li class="list-group-item"><a th:href="@{/alta_categoria}">Alta de Categoría</a></li>
                     <li class="list-group-item"><a th:href="@{/list_usuarios}">Listado de Usuarios</a></li>
-                    <li class="list-group-item"><a th:href="@{/alta_usuario}">Alta de Usuario</a></li>
                     <li class="list-group-item"><a th:href="@{/}">Cerrar Sesión</a></li>
                 </ul>
             </div>
@@ -31,22 +29,18 @@
 				    <tr>
 				      <th scope="col">ID_CATEGORIA </th>
 				      <th scope="col">DESCRIPCION </th>
-				      <th scope="col">Acción</th>
 				    </tr>
 				  </thead>
 				  <tbody>
 				    <tr th:each="c : ${categorias}">
 									<td th:text="${c.id_categoria}"></td>
-									<td th:text="${c.descripcion}"></td>
-									<td ><a th:href="@{|/list_anuncios/${c.id_categoria}/${c.descripcion}|}">Ver anuncios</a></td>
-					</tr>
+									<td th:text="${c.descripcion}"></td>					</tr>
 				  </tbody>
 				</table>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS y jQuery (asegúrate de incluir las bibliotecas correspondientes) -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYlT"
         crossorigin="anonymous"></script>

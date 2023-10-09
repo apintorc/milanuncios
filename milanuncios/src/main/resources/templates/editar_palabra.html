@@ -24,10 +24,8 @@
                 </ul>
             </div>
             <div class="col-md-9">
-                <!-- Contenido principal aquí -->
                 <h1>Editar palabra <span th:text="${palabra_v.getOriginal()}"></h1>  
                  <form action="#" th:object="${palabra_v}" method="POST" th:action="@{/grabar_palabra}" class="form-horizontal">
- <!-- Account Number field -->
 		<div class="form-group">
 			<label for="number" >Id Palabra</label>
 			<input type="text" class="form-control" id="id_palabra" readonly
@@ -91,7 +89,6 @@
                         </option>
                     </select>
                 </div>
-				<!--  Submit button -->
 		<div class="form-group">
 			<div class="col-xs-offset-2 col-xs-10">
 				<button type="submit" class="btn btn-primary">GRABAR</button>
@@ -106,7 +103,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS y jQuery (asegúrate de incluir las bibliotecas correspondientes) -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYlT"
         crossorigin="anonymous"></script>

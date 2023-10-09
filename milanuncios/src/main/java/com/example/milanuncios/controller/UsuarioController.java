@@ -103,6 +103,16 @@ public class UsuarioController {
 		return "list_anuncios_user";
 	}
 	
+	
+	@GetMapping("user/{user}")
+	public String getAnunciosByUser(Model model,@PathVariable("user") String user) {
+		List<Anuncio>anuncios = anuncioService.getAnunciosByUser(user);
+		List<Categoria>categorias = anuncioService.get_categorias();
+		model.addAttribute("categorias",categorias);
+		model.addAttribute("anuncios",anuncios);
+		return "misanuncios";
+	}
+	
 	@GetMapping("/ver_anuncio/{id_anuncio}")
 	public String verAnuncio(Model model,@PathVariable("id_anuncio") int id_anuncio) {
 		//List<Jugador>jugadores = equipoService.getJugadoresByEquipo(id_equipo);

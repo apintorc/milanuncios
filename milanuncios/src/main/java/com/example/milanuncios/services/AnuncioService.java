@@ -25,11 +25,15 @@ public interface AnuncioService {
 	public List<Anuncio> getAnuncios();
 	@GetMapping("/categoria/{id_categoria}")
 	public List<Anuncio> getAnunciosByCategoria(@PathVariable("id_categoria") int id_categoria);
+	@GetMapping("/user/{user}")
+	public List<Anuncio> getAnunciosByUser(@PathVariable("user") String user);
 	@DeleteMapping("/{id_anuncio}")
-	public void deleteAnuncio(int id_anuncio);
+	public void deleteAnuncio(@PathVariable("id_anuncio")int id_anuncio);
 	@PostMapping
 	public void updateAnuncioById(@RequestBody Anuncio anunciodto);
 	@GetMapping("/categoria")
 	public List<Categoria> get_categorias();
+	@PostMapping("/categoria")
+	public void add_categoria(@RequestBody Categoria categoria);
 	
 }

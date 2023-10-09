@@ -15,19 +15,15 @@
                 <hr>
                 <ul class="list-group">
                     <li class="list-group-item"><a th:href="@{/list_anuncios}">Listado de Anuncios</a></li>
-                    <li class="list-group-item"><a th:href="@{/alta_anuncio}">Alta de Anuncio</a></li>
                     <li class="list-group-item"><a th:href="@{/list_categorias}">Listado de Categorías</a></li>
                     <li class="list-group-item"><a th:href="@{/alta_categoria}">Alta de Categoría</a></li>
                     <li class="list-group-item"><a th:href="@{/list_usuarios}">Listado de Usuarios</a></li>
-                    <li class="list-group-item"><a th:href="@{/alta_usuario}">Alta de Usuario</a></li>
                     <li class="list-group-item"><a th:href="@{/}">Cerrar Sesión</a></li>
                 </ul>
             </div>
             <div class="col-md-9">
-                <!-- Contenido principal aquí -->
                 <h1>Alta de categoría</h1>
                  <form action="#" th:object="${categoria}" method="POST" th:action="@{/grabar_categoria}" class="form-horizontal">
- <!-- Account Number field -->
 		<div class="form-group">
 			<label for="number" >Id Categoría</label>
 			<input type="text" class="form-control" id="id_categoria"
@@ -50,7 +46,6 @@
 			
 		</div>
 
-				<!--  Submit button -->
 		<div class="form-group">
 			<div class="col-xs-offset-2 col-xs-10">
 				<button type="submit" class="btn btn-primary">GRABAR</button>
@@ -65,7 +60,6 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS y jQuery (asegúrate de incluir las bibliotecas correspondientes) -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYlT"
         crossorigin="anonymous"></script>
