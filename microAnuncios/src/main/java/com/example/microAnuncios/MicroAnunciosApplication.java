@@ -1,17 +1,15 @@
-package com.example.milanuncios;
+package com.example.microAnuncios;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EnableFeignClients
 @EnableDiscoveryClient
-public class MilanunciosApplication {
+public class MicroAnunciosApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(MilanunciosApplication.class, args);
+		SpringApplication.run(MicroAnunciosApplication.class, args);
 	}
 
 }

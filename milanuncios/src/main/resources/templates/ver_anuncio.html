@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalle del Anuncio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/welcome_user">Mil Anuncios</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/welcome_user">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/alta_anuncio">Crear Anuncio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/User1">Mis Anuncios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Cerrar Sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${anuncio.titulo}"></h5>
+                        <p class="card-text" th:text="${anuncio.descripcion}"></p>
+                        <p class="card-text"><strong>Precio:</strong> <span th:text="${anuncio.precio}"></span></p>
+                        <p class="card-text"><strong>Usuario anunciante:</strong> <span th:text="${anuncio.user}"></span></p>
+                        <p class="card-text"><strong>Fecha de la publicación:</strong> <span th:text="${anuncio.fecha_publicacion}"></span></p>
+                        <p class="card-text"><strong>Categoría:</strong> <span th:text="${anuncio.categoria.descripcion}"></span></p>
+                        <!--<p class="card-text"><strong>Fecha de Publicación:</strong> <span th:text="${anuncio.fecha}"></span></p>-->
+                        <a href="#" class="btn btn-primary">Contactar al Anunciante</a>
+                        <a href="#" class="btn btn-secondary">Compartir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
